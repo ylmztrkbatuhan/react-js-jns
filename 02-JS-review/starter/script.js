@@ -224,7 +224,7 @@ function getTotalReviewCount(book) {
 
 console.log(getTotalReviewCount(book));
 */
-
+/*
 function getTotalReviewCount(book) {
   const goodreads = book.reviews.goodreads.reviewsCount;
   const librarything = book.reviews.librarything?.reviewsCount ?? 0;
@@ -261,3 +261,49 @@ adventureBooks;
 
 const pagesAllBooks = books.reduce((acc, book) => acc + book.pages, 0);
 pagesAllBooks;
+
+const arr = [3, 7, 1, 6, 9, 6];
+const sorted = arr.sort ((a, b) => a - b);
+sorted;
+arr;
+
+const sortedByPages = books.slice().sort((a, b) => b.pages - a.pages);
+sortedByPages;
+
+// 1) Add book object to array
+const newBook = {
+  id: 6,
+  title: "Harry Potter and Chamber of Secrets",
+  author: "J. K. Rowling"
+};
+
+const booksAfterAdd = [...books, newBook];
+booksAfterAdd;
+
+// 2) Delete book object from array
+booksAfterDelete = booksAfterAdd.filter((book) => book.id !==3);
+booksAfterDelete;
+
+//3 Update book object in the array
+const booksAfterUpdate = booksAfterDelete.map((book) => book.id === 1 ? {...book, pages: 1210} : book);
+booksAfterUpdate;
+*/
+
+// fetch("https://jsonplaceholder.typicode.com/todos")
+//   .then((res) => res.json())
+//   .then((data) => console.log(data));
+
+// console.log("jonas");
+
+async function getTodos() {
+  await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await resizeBy.json();
+  console.log(data);
+
+  return data;
+}
+
+const todos = getTodos();
+
+console.log(todos);
+console.log("jonas");
