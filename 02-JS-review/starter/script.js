@@ -142,63 +142,58 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
-
-// Destructuring
-
 /*
-const book = getBook(3);
-book;
-
-// const title = book.title;
+// Destructring //
+const book = getBook(2); // const title = book.title;
 // const author = book.author;
 
 const { title, author, pages, publicationDate, genres, hasMovieAdaptation } =
   book;
 
+title;
+author;
 console.log(author, title, genres);
 
-// const primaryGenre = genres[0];
-// const secondaryGenre = genres[1];
+// const [primaryGenre, secondaryGenre] = genres;
 
 const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
+
 console.log(primaryGenre, secondaryGenre, otherGenres);
+console.log(primaryGenre, secondaryGenre);
 
-const newGenres = ["epic fantasy", ...genres];
+const newGenres = [genres, "epicfantasy"];
 newGenres;
-
-const updatedBook = {
-  ...book,
-  // Adding a new property
-  moviePublicationDate: "2001-12-19",
-
-  // Overwriting an existing property
-  pages: 1210,
-};
+const updatedBook = { book, moviePublicationDate: "2001-12-21", pages: 1210 };
 updatedBook;
+
+const summary = `${title}, ${pages}-page long book, was written by ${author} and published in ${
+  publicationDate.split("-")[0]
+} a book `;
+summary;
+
+const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
+pagesRange;
+
+// Arrow functions
 
 // function getYear(str) {
 //   return str.split("-")[0];
 // }
 
 const getYear = (str) => str.split("-")[0];
+
 console.log(getYear(publicationDate));
 
-const summary = `${title}, a ${pages}-page long book, was written by ${author} and published in ${getYear(
-  publicationDate
-)}. The book has ${hasMovieAdaptation ? "" : "not"} been adapted as a movie`;
-summary;
+// Short Circuiting
 
-const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
-pagesRange;
-console.log(`The book has ${pagesRange} pages`);
+console.log(true && "Some String");
+console.log(false && "Some String");
 
-console.log(true && "Some string");
-console.log(false && "Some string");
-console.log(hasMovieAdaptation && "This book has a movie");
+console.log(hasMovieAdaptation && "This book has movie");
 
-// falsy: 0, '', null, undefined
+// falsy :0, null, undefined
 console.log("jonas" && "Some string");
-console.log(0 && "Some string");
+console.log(0 && "Some String");
 
 console.log(true || "Some string");
 console.log(false || "Some string");
@@ -208,33 +203,16 @@ console.log(book.translations.spanish);
 const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
 spanishTranslation;
 
-// console.log(book.reviews.librarything.reviewsCount);
-// const countWrong = book.reviews.librarything.reviewsCount || "no data";
-// countWrong;
+const count = book.reviews.librarything.reviewsCount ?? "no data";
+count;
 
-// const count = book.reviews.librarything.reviewsCount ?? "no data";
-// count;
+function getTotalreviewCount(book) {}
 
-function getTotalReviewCount(book) {
-  const goodreads = book.reviews?.goodreads?.reviewsCount;
-  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
-  librarything;
-  return goodreads + librarything;
-}
+getTotalreviewCount(book);
 
-console.log(getTotalReviewCount(book));
-*/
-
-/*
-function getTotalReviewCount(book) {
-  const goodreads = book.reviews?.goodreads?.reviewsCount;
-  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
-  librarything;
-  return goodreads + librarything;
-}
+// Map method
 
 const books = getBooks();
-books;
 
 const x = [1, 2, 3, 4, 5].map((el) => el * 2);
 console.log(x);
@@ -242,12 +220,9 @@ console.log(x);
 const titles = books.map((book) => book.title);
 titles;
 
-const essentialData = books.map((book) => ({
-  title: book.title,
-  author: book.author,
-  reviewsCount: getTotalReviewCount(book),
-}));
-essentialData;
+const essentialData = books.map((book) => {});
+
+// filter method
 
 const longBooksWithMovie = books
   .filter((book) => book.pages > 500)
@@ -259,36 +234,49 @@ const adventureBooks = books
   .map((book) => book.title);
 adventureBooks;
 
-const pagesAllBooks = books.reduce((sum, book) => sum + book.pages, 0);
+// Reduce method
+
+const pagesAllBooks = books.reduce((acc, book) => acc + book.pages, 0);
 pagesAllBooks;
 
-const arr = [3, 7, 1, 9, 6];
+// Sort method
+
+const arr = [3, 7, 1, 6, 9];
+
 const sorted = arr.slice().sort((a, b) => a - b);
 sorted;
 arr;
 
-const sortedByPages = books.slice().sort((a, b) => a.pages - b.pages);
+const sortedByPages = books.slice().sort((a, b) => b.pages - a.pages);
 sortedByPages;
 
+// Working with immutable arrays
+
 // 1) Add book object to array
+
 const newBook = {
   id: 6,
-  title: "Harry Potter and the Chamber of Secrets",
-  author: "J. K. Rowling",
+  title: "Harry Potter and Chamber of Secrets",
+  author: "J.K. Rowling",
 };
+
 const booksAfterAdd = [...books, newBook];
 booksAfterAdd;
 
 // 2) Delete book object from array
+
 const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 3);
-booksAfterDelete;
 
 // 3) Update book object in the array
+
 const booksAfterUpdate = booksAfterDelete.map((book) =>
   book.id === 1 ? { ...book, pages: 1210 } : book
 );
+
 booksAfterUpdate;
 */
+
+// Async fetching data with promise
 
 // fetch("https://jsonplaceholder.typicode.com/todos")
 //   .then((res) => res.json())
@@ -296,15 +284,16 @@ booksAfterUpdate;
 
 // console.log("jonas");
 
-// async function getTodos() {
-//   const res = await fetch("https://jsonplaceholder.typicode.com/todos");
-//   const data = await res.json();
-//   console.log(data);
+async function getTodos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  console.log(data);
 
-//   return data;
-// }
+  return data;
+}
 
-// const todos = getTodos();
-// console.log(todos);
+const todos = getTodos();
 
-// console.log("jonas");
+console.log(todos);
+
+console.log("jonas");
